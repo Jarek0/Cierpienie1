@@ -23,7 +23,7 @@ namespace M1_P1 {
             // dziecko.UstawRokUrodzenia(DateTime.Now.Year - 16); //zgloszeniewyjatku osoba niepełnoletnia
             **/
             var stworzeniStudenci = new List<Student>();
-            for (int i = 1; i <= 4; i++)
+            for (var i = 1; i <= 4; i++)
             {
                 try
                 {
