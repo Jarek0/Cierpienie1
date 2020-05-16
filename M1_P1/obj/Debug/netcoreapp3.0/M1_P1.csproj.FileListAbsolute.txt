@@ -1,0 +1,11 @@
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1.deps.json
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1.runtimeconfig.json
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1.runtimeconfig.dev.json
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1.dll
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/bin/Debug/netcoreapp3.0/M1_P1.pdb
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/obj/Debug/netcoreapp3.0/M1_P1.csprojAssemblyReference.cache
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/obj/Debug/netcoreapp3.0/M1_P1.AssemblyInfoInputs.cache
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/obj/Debug/netcoreapp3.0/M1_P1.AssemblyInfo.cs
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/obj/Debug/netcoreapp3.0/M1_P1.dll
+/home/jarek/RiderProjects/Cierpienie1/M1_P1/obj/Debug/netcoreapp3.0/M1_P1.pdb
