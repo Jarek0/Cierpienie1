@@ -8,77 +8,77 @@ namespace M1_P1
 {
     public class Student: Osoba
     {
-        private readonly Regex formatNumeruAlbumu = new Regex(@"^\d{4,8}$");
-        private readonly Regex formatKwotaStypendium = new Regex(@"^\d+(\.\d{1,2})?$");
+        private readonly Regex _formatNumeruAlbumu = new Regex(@"^\d{4,8}$");
+        private readonly Regex _formatKwotaStypendium = new Regex(@"^\d+(\.\d{1,2})?$");
         
-        private int numerAlbumu;
-        private bool czyPobieraStypendiumNaukowe;
-        private decimal kwotaStypendiumNaukowego;
-        private bool czyUprawiaSport;
-        private string uprawianaDyscyplinaSportowa;
+        private int _numerAlbumu;
+        private bool _czyPobieraStypendiumNaukowe;
+        private decimal _kwotaStypendiumNaukowego;
+        private bool _czyUprawiaSport;
+        private string _uprawianaDyscyplinaSportowa;
 
         // konstruktor jest prywatny, aby nie mozna bylo stworzyc nieprawidlowego studenta (studenta mozna stworzyc tylko przy uzyciu kretora)
         private Student() { }
         
         public void UstawNumerAlbumu(string podanyNumerAlbumu)
         {
-            if (!formatNumeruAlbumu.IsMatch(podanyNumerAlbumu))
+            if (!_formatNumeruAlbumu.IsMatch(podanyNumerAlbumu))
             {
                 throw new ArgumentException("Podany numer albumu ma nieprawidlowy format (Numer albumu musi skladac sie z od 4 do 8 cyfr)");
             }
-            numerAlbumu = Parse(podanyNumerAlbumu);
+            _numerAlbumu = Parse(podanyNumerAlbumu);
         }
 
         public void UstawCzyPobieraStypendiumNaukowe(bool podaneCzyPobieraStypendiumNaukowe)
         {
-            czyPobieraStypendiumNaukowe = podaneCzyPobieraStypendiumNaukowe;
+            _czyPobieraStypendiumNaukowe = podaneCzyPobieraStypendiumNaukowe;
         }
 
         public void UstawKwoteStypendium(decimal podanaKwotaStypendiumNaukowego)
         {
-            if (!czyPobieraStypendiumNaukowe)
+            if (!_czyPobieraStypendiumNaukowe)
             {
                 throw new ArgumentException("Student nie pobiera stypendium naukowego");
             }
-            if (!formatKwotaStypendium.IsMatch(podanaKwotaStypendiumNaukowego.ToString(CultureInfo.InvariantCulture)))
+            if (!_formatKwotaStypendium.IsMatch(podanaKwotaStypendiumNaukowego.ToString(CultureInfo.InvariantCulture)))
             {
                 throw new ArgumentException("Nieprawidlowy format waluty");
             }
 
-            this.kwotaStypendiumNaukowego = podanaKwotaStypendiumNaukowego;
+            this._kwotaStypendiumNaukowego = podanaKwotaStypendiumNaukowego;
         }
         
         public void UstawyCzyUprawiaSport(bool podaneCzyUprawiaSport)
         {
-            czyUprawiaSport = podaneCzyUprawiaSport;
+            _czyUprawiaSport = podaneCzyUprawiaSport;
         }
         
         public void UstawUprawianaDysciplineSportowa(string podanaUprawianaDyscyplinaSportowa)
         {
-            if (!czyUprawiaSport)
+            if (!_czyUprawiaSport)
             {
                 throw new ArgumentException("Student nie uprawia sportu");
             }
 
-            this.uprawianaDyscyplinaSportowa = podanaUprawianaDyscyplinaSportowa;
+            this._uprawianaDyscyplinaSportowa = podanaUprawianaDyscyplinaSportowa;
         }
         
         public override string ToString()
         {
             var informacjeOStypendiumNaukowym = "ktory/a " + 
-                                                (czyPobieraStypendiumNaukowe ? 
-                                                    $"pobiera stypendium naukowe w wysokosci: {kwotaStypendiumNaukowego} zl" : 
+                                                (_czyPobieraStypendiumNaukowe ? 
+                                                    $"pobiera stypendium naukowe w wysokosci: {_kwotaStypendiumNaukowego} zl" : 
                                                     "nie pobiera stypendium naukowego");
             var informacjeOUprawianymSporcie = "i ktory/a " + 
-                                                (czyUprawiaSport ? 
-                                                    $"uprawia sport: {uprawianaDyscyplinaSportowa}" : 
+                                                (_czyUprawiaSport ? 
+                                                    $"uprawia sport: {_uprawianaDyscyplinaSportowa}" : 
                                                     "nie uprawia zadnego sportu");
-            return $"{base.ToString()}, numer albumu: {numerAlbumu}, {informacjeOStypendiumNaukowym} {informacjeOUprawianymSporcie}.";
+            return $"{base.ToString()}, numer albumu: {_numerAlbumu}, {informacjeOStypendiumNaukowym} {informacjeOUprawianymSporcie}.";
         }
         
         public class KonsolowyKreatorStudenta
         {
-            private static readonly Regex formatWartosciBool = new Regex(@"^[T|N]{1}$");
+            private static readonly Regex FormatWartosciBool = new Regex(@"^[T|N]{1}$");
 
             public static Student StworzStudenta()
             {
@@ -98,8 +98,8 @@ namespace M1_P1
                 );
                 UstawDanaStudentaZKonsoli(
                     podanyRokUrodzenia => tworzonyStudent.UstawRokUrodzenia(
-                        konwertujDanaCalkowita(podanyRokUrodzenia)
-                        ),
+                        KonwertujDanaCalkowita(podanyRokUrodzenia)
+                    ),
                     "Podaj rok urodzenia studenta i wcisnij Enter. (ESC aby wyjsc):",
                     "Nie udalo sie podac roku urodzenia studenta",
                     "Podano rok urodzenia studenta studenta"
@@ -113,18 +113,18 @@ namespace M1_P1
                 UstawDanaStudentaZKonsoli(
                     podaneCzyPobieraStypendiumNaukowe => 
                         tworzonyStudent.UstawCzyPobieraStypendiumNaukowe(
-                            konwertujDanaBool(podaneCzyPobieraStypendiumNaukowe)
+                            KonwertujDanaBool(podaneCzyPobieraStypendiumNaukowe)
                         ),
                     "Podaj informacje czy student pobiera stypendium naukowe (wartosc T lub N) i wcisnij Enter. (ESC aby wyjsc):",
                     "Nie udalo sie podac informacji czy student pobiera stypendium naukowe",
                     "Podano informacje czy student pobiera stypendium naukowe"
                 );
-                if (tworzonyStudent.czyPobieraStypendiumNaukowe)
+                if (tworzonyStudent._czyPobieraStypendiumNaukowe)
                 {
                     UstawDanaStudentaZKonsoli(
                         podanaKwotaStypendiumNaukowego => tworzonyStudent.UstawKwoteStypendium(
-                            konwertujDanaZmiennoprzecinkowa(podanaKwotaStypendiumNaukowego)
-                            ),
+                            KonwertujDanaZmiennoprzecinkowa(podanaKwotaStypendiumNaukowego)
+                        ),
                         "Podaj kwote stypendium naukowego i wcisnij Enter. (ESC aby wyjsc):",
                         "Nie udalo sie podac kwoty stypendium naukowego",
                         "Podano kwote stypendium naukowego"
@@ -133,13 +133,13 @@ namespace M1_P1
                 UstawDanaStudentaZKonsoli(
                     podaneCzyUprawiaSport => 
                         tworzonyStudent.UstawyCzyUprawiaSport(
-                            konwertujDanaBool(podaneCzyUprawiaSport)
+                            KonwertujDanaBool(podaneCzyUprawiaSport)
                         ),
                     "Podaj informacje czy student uprawia sport (wartosc T lub N) i wcisnij Enter. (ESC aby wyjsc):",
                     "Nie udalo sie podac informacji czy student uprawia sport",
                     "Podano informacje czy student uprawia sport"
                 );
-                if (tworzonyStudent.czyUprawiaSport)
+                if (tworzonyStudent._czyUprawiaSport)
                 {
                     UstawDanaStudentaZKonsoli(
                         podanaUprawianaDyscyplinaSportowa => tworzonyStudent.UstawUprawianaDysciplineSportowa(
@@ -153,9 +153,9 @@ namespace M1_P1
                 return tworzonyStudent;
             }
 
-            private static bool konwertujDanaBool(string podanaWartoscBool)
+            private static bool KonwertujDanaBool(string podanaWartoscBool)
             {
-                if (!formatWartosciBool.IsMatch(podanaWartoscBool))
+                if (!FormatWartosciBool.IsMatch(podanaWartoscBool))
                 {
                     throw new ArgumentException("Podany wartosc ma nieprawidlowy format (Podaj wartosc T lub N)");
                 }
@@ -163,7 +163,7 @@ namespace M1_P1
                 return podanaWartoscBool.Equals("T");
             }
             
-            private static int konwertujDanaCalkowita(string podanaWartoscCalkowita)
+            private static int KonwertujDanaCalkowita(string podanaWartoscCalkowita)
             {
                 try
                 {
@@ -172,14 +172,14 @@ namespace M1_P1
                         return wartoscCalkowita;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new ArgumentException("Podany wartosc ma nieprawidlowy format (Podaj liczbe calkowita)");
                 }
                 throw new ArgumentException("Podany wartosc ma nieprawidlowy format (Podaj liczbe calkowita)");
             }
             
-            private static decimal konwertujDanaZmiennoprzecinkowa(string podanaWartoscZmiennoPrzecinkowa)
+            private static decimal KonwertujDanaZmiennoprzecinkowa(string podanaWartoscZmiennoPrzecinkowa)
             {
                 try
                 {
@@ -188,19 +188,17 @@ namespace M1_P1
                         return wartoscZmiennoPrzecinkowa;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new ArgumentException("Podany wartosc ma nieprawidlowy format (Podaj liczbe zmiennoprzecinkowa)");
                 }
                 throw new ArgumentException("Podany wartosc ma nieprawidlowy format (Podaj liczbe zmiennoprzecinkowa)");
             }
             
-            private static string UstawDanaStudentaZKonsoli(
-                Action<string> funkcjaUstawiajacaDane, 
-                string komunikatPoczatkowy, 
-                string komunikatBledu, 
-                string komunikatKoncowy
-                )
+            private static void UstawDanaStudentaZKonsoli(Action<string> funkcjaUstawiajacaDane,
+                string komunikatPoczatkowy,
+                string komunikatBledu,
+                string komunikatKoncowy)
             {
                 Console.WriteLine(komunikatPoczatkowy);
                 while (true)
@@ -215,7 +213,7 @@ namespace M1_P1
                         }
                         funkcjaUstawiajacaDane.Invoke(dana);
                         Console.WriteLine(komunikatKoncowy);
-                        return dana;
+                        return;
                     }
                     catch (ArgumentException e)
                     {
